@@ -17,13 +17,19 @@ set(SFML_INCS "lib/sfml/include")
 link_directories("${CMAKE_BINARY_DIR}/lib/sfml/lib")
 
 #### Practical 1 ####
-file(GLOB_RECURSE SOURCES practical_1/*.cpp practical_1/*.h)
-add_executable(PRACTICAL_1 ${SOURCES})
-target_include_directories(PRACTICAL_1 PRIVATE ${SFML_INCS})
-target_link_libraries(PRACTICAL_1 sfml-graphics)
+file(GLOB_RECURSE SOURCES 01_practical/*.cpp 01_practical/*.h)
+add_executable(01_PRACTICAL ${SOURCES})
+target_include_directories(01_PRACTICAL PRIVATE ${SFML_INCS})
+target_link_libraries(01_PRACTICAL sfml-graphics)
 
 #### Practical 2 ####
-file(GLOB_RECURSE SOURCES practical_2/*.cpp practical_2/*.h)
-add_executable(PRACTICAL_2 ${SOURCES})
-target_include_directories(PRACTICAL_2 PRIVATE ${SFML_INCS})
-target_link_libraries(PRACTICAL_2 sfml-graphics)
+file(GLOB_RECURSE SOURCES 02_practical/*.cpp 02_practical/*.h)
+add_executable(02_PRACTICAL ${SOURCES})
+target_include_directories(02_PRACTICAL PRIVATE ${SFML_INCS})
+target_link_libraries(02_PRACTICAL sfml-graphics)
+
+#### Practical 3 ####
+file(GLOB_RECURSE SOURCES 03_invaders/*.cpp 03_invaders/*.h)
+add_executable(03_INVADERS ${SOURCES})
+target_include_directories(03_INVADERS PRIVATE ${SFML_INCS})
+target_link_libraries(03_INVADERS sfml-graphics)
