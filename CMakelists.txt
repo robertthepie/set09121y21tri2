@@ -16,6 +16,20 @@ add_subdirectory("lib/sfml")
 set(SFML_INCS "lib/sfml/include")
 link_directories("${CMAKE_BINARY_DIR}/lib/sfml/lib")
 
+# Maths lib
+add_library(lib_maths INTERFACE)
+target_sources(lib_maths INTERFACE "${CMAKE_SOURCE_DIR}/lib_maths/maths.h")
+target_include_directories(lib_maths INTERFACE "${CMAKE_SOURCE_DIR}/lib_maths" SYSTEM INTERFACE ${SFML_INCS})
+
+## Tile loader lib
+file(GLOB_RECURSE SOURCE_FILES lib_tile_level_loader/*.cpp lib_tile_level_loader/*.h)
+add_library(lib_tile_level_loader STATIC ${SOURCE_FILES})
+target_include_directories(lib_tile_level_loader INTERFACE "${CMAKE_SOURCE_DIR}/lib_tile_level_loader/" )
+target_link_libraries(lib_tile_level_loader lib_maths sfml-graphics)
+
+
+
+
 #### Add Resource Dependencies ####
 add_custom_target(copy_resources ALL COMMAND ${CMAKE_COMMAND} 
   -E copy_directory
@@ -55,3 +69,17 @@ set_target_properties(03_INVADERS
 )
 
 add_dependencies(03_INVADERS copy_resources)
+
+#### Practical 4 ####
+file(GLOB_RECURSE SOURCES 04_tileSet/*.cpp 04_tileSet/*.h)
+add_executable(04_TILESET ${SOURCES})
+target_include_directories(04_TILESET PRIVATE ${SFML_INCS})
+target_link_libraries(04_TILESET sfml-graphics)
+target_link_libraries(04_TILESET lib_tile_level_loader lib_maths sfml-graphics)
+
+set_target_properties(04_TILESET 
+    PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY
+    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(Configuration)
+)
+
+add_dependencies(04_TILESET copy_resources)

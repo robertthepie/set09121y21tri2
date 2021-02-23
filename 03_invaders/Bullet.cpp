@@ -34,9 +34,8 @@ Bullet::Bullet(const sf::Vector2f& pos, const bool mode) {
 
 
 void Bullet::Update(const float& dt) {
-    //move(0, (dt * 200.0f * (_mode ? 1.0f : -1.0f)));
-    for (int i = 0; i < 256; i++) {
-        bullets[i]._Update(dt);
+    for (auto &s : bullets) {
+        s._Update(dt);
     }
 }
 
